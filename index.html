@@ -1,24 +1,45 @@
 <!DOCTYPE html>
-
 <html>
-   <head>
-   <title> My personal "Hello" button </title>
-   
-      <script type="text/javascript">
-         function sayHello()
-         {
-            document.write ("Hello there, how are you doing? As you can see, there was nothing to be shy about, eh?!");
-         }
-      </script>
-      
-   </head>
-   <body>
-      <p>Click the button to watch my function say hello!</p>
-      <p> Trust me, it will make you feel better.</p>
-      <p>Come on now though, don't be shy...</p>
-      <form>
-         <input type="button" onclick="sayHello()" value="Say Hello">
-      </form>
-      
-   </body>
+<head>
+<title> CS102 Stuff </title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<meta charset="UTF-8"/>
+<body> 
+    <div>
+        <form>
+            <input type="text" id="input1">
+        <select>
+            <option value="+">+</option>
+            <option value="*">*</option>
+            <option value="-">-</option>
+            <option value="/">/</option> 
+        </select>
+            <input type="text" id="input2">
+            <input type="button"  id="Calc" onclick="calculate()"/>
+            <input type="text" id="output" disabled> 
+        </form>
+    </div>
+    <p id="error"/>
+       
+    <script>
+           var i=1;
+           var in1=3;
+           var in2=6;
+        
+        function calculate (); {
+        var in1= parseInt ($('input1').val());
+        var in2= parseInt ($('input2').val());
+        if (checkInput()) 
+         eval var res=(in1 + $('#operator') + in2)
+     
+        else 
+         $('error').html(i + "mistakes have been made")
+        } 
+       function checkinput1(in1,in2) {;
+        if(isNaN(in1) && isNaN (in2) );
+        
+       
+        </script>
+</body>
+</head>
 </html>
