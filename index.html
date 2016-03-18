@@ -1,45 +1,35 @@
 <!DOCTYPE html>
+
 <html>
-<head>
-<title> CS102 Stuff </title>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-<meta charset="UTF-8"/>
-<body> 
-    <div>
-        <form>
-            <input type="text" id="input1">
-        <select>
-            <option value="+">+</option>
-            <option value="*">*</option>
-            <option value="-">-</option>
-            <option value="/">/</option> 
-        </select>
-            <input type="text" id="input2">
-            <input type="button"  id="Calc" onclick="calculate()"/>
-            <input type="text" id="output" disabled> 
-        </form>
-    </div>
-    <p id="error"/>
-       
-    <script>
-           var i=1;
-           var in1=3;
-           var in2=6;
-        
-        function calculate (); {
-        var in1= parseInt ($('input1').val());
-        var in2= parseInt ($('input2').val());
-        if (checkInput()) 
-         eval var res=(in1 + $('#operator') + in2)
+   <head>
+   <title>Who are you?</title>       
+   </head>
+   <body>
+       <p> Who are you? Please choose. </p>
      
-        else 
-         $('error').html(i + "mistakes have been made")
-        } 
-       function checkinput1(in1,in2) {;
-        if(isNaN(in1) && isNaN (in2) );
-        
-       
-        </script>
-</body>
-</head>
+<script>
+function whoru(){
+    var visitor = parseInt($('#choice').val());
+if(( visitor === "Family") && ( visitor !== "Friend")){
+	document.write("I missed you so much");
+     }
+else if(( visitor !== "foreigner") && ( visitor === "Friend") ){
+	document.write("I missed you so much");
+} 
+}
+</script>
+ <!--Here, if the user is family, it gives out a warming welcome but if the user is not a foreigner
+it still gives a warming welcome which brings us to the 'Family or friend' statement without the direct implementation
+of 'or' -->
+   <div>
+   <form>
+       <select>
+       <option  value="Family">Family</option>
+       <option  value="foreigner">foreigner</option>
+       <option  value="Friend">Friend</option>
+       </select>
+       <input type="button" id="Confirm" value="Confirm" onclick="whoru();" />
+   </form>
+   </div>
+   </body>
 </html>
