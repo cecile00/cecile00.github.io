@@ -1,46 +1,98 @@
-<!DOCTYPE html>
 <html>
-    <head>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>        
-
-        <title>JSON Array Example</title>
+    <head>  
+        <title>Drag n Drop</title>
         <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+        <style>
+            }
+            ul
+            {
+                list-style-type: none;
+            }
+        </style>
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js"></script>
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/jquery-ui.min.js"></script>
+
+
+
+        <script type="text/javascript">
+            $(document).ready(function () {//Anything in here will be executed
+                //once the document is fully loaded.
+                $("#arrow").draggable();
+                $("#target").droppable(
+                        {
+                            drop: function () {
+                                $("#arrow").draggable("disable");
+                                $("#target").draggable("disable");
+                                $("#target").css("background-color", "red").html("");
+                                $("#arrow").css("background-color", "red").html("");
+                            }
+                        }
+                );
+            });
+        </script>
+
     </head>
     <body>
-        
-        <div id = "avg">
-            
+        <div>
+            <ul id="numName">
+
+            </ul>
+            <ul id="numNumeric">
+
+            </ul>
         </div>
-        
-        <script>
-            
-            var students = {students:[
-                    {"name":"caner", "age":25, "height":170},
-                    {"name":"canan", "age":27, "height":175},
-                    {"name":"jens", "age":40, "height":170}]};
-            var avgAge = calcAvgAge(students);
-            $('#avg').append("Average age of students: " + avgAge + "<br>");
-            var avgHeight = calcAvgHeight(students);
-            $('#avg').append("Average height of students: " + avgHeight + "<br>");
-            
-            function calcAvgAge(obj){
-                var totalAge = 0;
-                for(var i = 0; i < obj.students.length; i++){
-                    totalAge += obj.students[i].age;
-                }
-                return totalAge / obj.students.length;
+        <script type="text/javascript">
+            $("#arrow").draggable();
+            $("#target").draggable();
+            var numText = ['null','eins','zwei','drei','vier','fünf','sechs','sieben','sechs','acht','neun','zehn' ];
+            var ulText = $('#numName');
+            var ulNum = $('#numNumeric');
+            var dimx = $('body')
+            var dimy = 
+            for (var i=0; i < numText.length; i++) {
+                ulText.append('<li id="t' + (i) + '">' + numText[i] +'</li>');
+                ulNum.append ('<li id="n' + (i) + '">' (i) + '</li>');
+            }
+            var hidden = 0;
+            for (var i=0; i< numText.length; i++) {
+                $("#n" + i).draggable();
+                $("#n" + i).data("index", {index: i});
+                $("#t" + i).data("index", {index: i});               
+                $("#t" + i).droppable({drop: function (event,ui) {
+                        var ni = ui.draggable.attr("id");
+                        var ti = this.id;
+                        var niElem = $('#' + ni);
+                        var tiElem = $('#' + ti);
+                        if (niElem.data("index").index === tiElem.data("index").index) {
+                            
+                        $("#" + ni).dragable("disable");
+                        $("#" +ni).css("display","none");
+                        hidden++;
+                        if (hidden === numText.length) {
+                            
+                        }
+                        } else {
+                            var left = Math.floor((Math.random() * (dimx - 20)) +10);
+                            var right = Math.floor((Math.random() * (dimy - 20)) +10);
+                        }
+                        }
+        }
             }
             
-            function calcAvgHeight(obj){
-                var totalHeight = 0;
-                for(var i = 0; i < obj.students.length; i++){
-                    totalHeight += obj.students[i].height;
-                return 0;
             
-            }
-            
-        </script>
-        
+            $.fn.randomize = function (selector) {
+                var $elems = selector ? $(this).find(selector) : $(this).children(),
+                        $parents = $elems.parent();
+                $parents.each(function () {
+                    $(this).children(selector).sort(function () {
+                        return Math.round(Math.random()) - 0.5;
+                    }).detach().appendTo(this);
+                });
+                return this;
+            };
+            $('ul').randomize();
+        </script>        
     </body>
 </html>
+
