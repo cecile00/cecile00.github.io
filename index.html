@@ -3,8 +3,7 @@
         <title>Drag n Drop</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">    
-        <style>
-            }
+        <style>            
             ul
             {
                 list-style-type: none;
@@ -12,6 +11,7 @@
         </style>
         <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js"></script>
         <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/jquery-ui.min.js"></script>
+        <script src="../js.cookie.js" type="text/javascript"></script>
 
 
 
@@ -45,54 +45,80 @@
         <script type="text/javascript">
             $("#arrow").draggable();
             $("#target").draggable();
-            var numText = ['null','eins','zwei','drei','vier','fünf','sechs','sieben','sechs','acht','neun','zehn' ];
+            var numText = ['null', 'eins', 'zwei', 'drei', 'vier', 'fünf', 'sechs', 'sieben', 'sechs', 'acht', 'neun', 'zehn'];
             var ulText = $('#numName');
             var ulNum = $('#numNumeric');
-            var dimx = $('body')
-            var dimy = 
-            for (var i=0; i < numText.length; i++) {
-                ulText.append('<li id="t' + (i) + '">' + numText[i] +'</li>');
-                ulNum.append ('<li id="n' + (i) + '">' (i) + '</li>');
+            var dimx = $('body').width();
+            var dimy = $('body').height();
+            var numbersCookie = Cookies.getJSON('numbers'); 
+
+            for (var i = 0; i < numText.length; i++) {
+                var number = {
+                    word: numText[i],
+                    digit: i,
+                    score: 0,
+                    placed: false
+                };
+                //check this part again!!
+                numbers.push(number);
+                ulText.append('<li id="t' + numbers[i].digit + '">' + numbers[i].word + '</li>');
+                ulNum.append('<li id="n' + numbers[i].digit + '">' + numbers[i].word + '</li>');
             }
             var hidden = 0;
-            for (var i=0; i< numText.length; i++) {
-                $("#n" + i).draggable();
-                $("#n" + i).data("index", {index: i});
-                $("#t" + i).data("index", {index: i});               
-                $("#t" + i).droppable({drop: function (event,ui) {
-                        var ni = ui.draggable.attr("id");
-                        var ti = this.id;
-                        var niElem = $('#' + ni);
-                        var tiElem = $('#' + ti);
-                        if (niElem.data("index").index === tiElem.data("index").index) {
-                            
-                        $("#" + ni).dragable("disable");
-                        $("#" +ni).css("display","none");
-                        hidden++;
-                        if (hidden === numText.length) {
-                            
+            for (var i = 0; i < numText.length; i++) {
+            $("#n" + i).draggable();
+                    $("#n" + i).data("index", {index: i});
+                    $("#t" + i).data("index", {index: i});
+                    $("#t" + i).droppable({drop: function (event, ui) {
+                var ni = ui.draggable.attr("id");
+                var ti = this.id;
+                var niElem = $('#' + ni);
+                var tiElem = $('#' + ti);
+                if (niElem.data("index").index === tiElem.data("index").index) {
+
+                    $("#" + ni).dragable("disable");
+                    $("#" + ni).css("display", "none");
+                    hidden++;
+                    if (hidden === numText.length) {
+                        $('ul').randomize;
+                        $('#numText').sortable({
+                            start: function (event,ui){
+                            },
+                            update: function(event,ui){
+                            var ordered = 0;
                         }
-                        } else {
-                            var left = Math.floor((Math.random() * (dimx - 20)) +10);
-                            var right = Math.floor((Math.random() * (dimy - 20)) +10);
-                        }
-                        }
-        }
-            }
-            
-            
+                            });
+                        };
+                    
+                      else {
+                        var left = Math.floor((Math.random() * (dimx - 20)) + 10);
+                        var right = Math.floor((Math.random() * (dimy - 20)) + 10);
+                        niElem.css("left", left + "px"),
+                        niElem.css("right", right + "px");
+                        numbers[niElem.data("index").index].score++;
+                        var score = numbers[niElem.data("index").index].score;
+                        if (score > 1)
+                            alert("Oh, you can do much better than that! You were mistaken" + score + "times :(");
+                    }
+                }
+
+            }})
+            };
+
+
             $.fn.randomize = function (selector) {
-                var $elems = selector ? $(this).find(selector) : $(this).children(),
-                        $parents = $elems.parent();
-                $parents.each(function () {
-                    $(this).children(selector).sort(function () {
-                        return Math.round(Math.random()) - 0.5;
-                    }).detach().appendTo(this);
-                });
-                return this;
+            var $elems = selector ? $(this).find(selector) : $(this).children(),
+                    $parents = $elems.parent();
+            $parents.each(function () {
+                $(this).children(selector).sort(function () {
+                    return Math.round(Math.random()) - 0.5;
+                }).detach().appendTo(this);
+            });
+                    return this;
             };
             $('ul').randomize();
         </script>        
     </body>
 </html>
+
 
